@@ -1,0 +1,10 @@
+
+.idea/
+
+tarraform/.terraform.lock.hcl
+
+tarraform/terraform.tfstate
+
+tarraform/terraform.tfstate.backup
+
+tarraform/.terraform/providers/
