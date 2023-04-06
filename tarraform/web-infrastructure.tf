@@ -7,7 +7,7 @@ resource "aws_vpc" "infodsm-vpc" {
 
   tags = {
     service = "infodsm"
-    name = "infodsm-vpc"
+    Name = "infodsm-vpc"
   }
 }
 
@@ -20,7 +20,7 @@ resource "aws_subnet" "infodsm-subnet-publicA" {
 
   tags = {
     service = "infodsm"
-    name = "infodsm-subnet-publicA"
+    Name = "infodsm-subnet-publicA"
   }
 }
 
@@ -33,7 +33,7 @@ resource "aws_subnet" "infodsm-subnet-publicB" {
 
   tags = {
     service = "infodsm"
-    name = "infodsm-subnet-publicB"
+    Name = "infodsm-subnet-publicB"
   }
 }
 
@@ -46,7 +46,7 @@ resource "aws_subnet" "infodsm-subnet-privateA" {
 
   tags = {
     service = "infodsm"
-    name = "infodsm-subnet-privateA"
+    Name = "infodsm-subnet-privateA"
   }
 }
 
@@ -59,7 +59,7 @@ resource "aws_subnet" "infodsm-subnet-privateB" {
 
   tags = {
     service = "infodsm"
-    name = "infodsm-subnet-privateB"
+    Name = "infodsm-subnet-privateB"
   }
 }
 
@@ -69,7 +69,7 @@ resource "aws_internet_gateway" "infodsm-igw" {
 
   tags = {
     service = "infodsm"
-    name = "infodsm-igw"
+    Name = "infodsm-igw"
   }
 }
 
@@ -85,7 +85,7 @@ resource "aws_nat_gateway" "infodsm-ngw" {
 
   tags = {
     service = "infodsm"
-    name = "infodsm-ngw"
+    Name = "infodsm-ngw"
   }
 }
 
@@ -95,7 +95,7 @@ resource "aws_route_table" "infodsm-rt-public" {
 
   tags = {
     service = "infodsm"
-    name = "infodsm-rt-public"
+    Name = "infodsm-rt-public"
   }
 }
 
@@ -122,7 +122,7 @@ resource "aws_route_table" "infodsm-rt-privateA" {
 
   tags = {
     service = "infodsm"
-    name = "infodsm-rt-privateA"
+    Name = "infodsm-rt-privateA"
   }
 }
 
@@ -145,7 +145,7 @@ resource "aws_route_table" "infodsm-rt-privateB" {
 
   tags = {
     service = "infodsm"
-    name = "infodsm-rt-privateB"
+    Name = "infodsm-rt-privateB"
   }
 }
 
@@ -187,7 +187,7 @@ resource "aws_security_group" "infodsm-sg-ssh" {
 
   tags = {
     service = "infodsm"
-    name = "infodsm-sg-ssh"
+    Name = "infodsm-sg-ssh"
   }
 }
 
@@ -218,7 +218,7 @@ resource "aws_security_group" "infodsm-sg-cloudflare" {
   }
   tags = {
     service = "infodsm"
-    name = "infodsm-sg-cloudflare"
+    Name = "infodsm-sg-cloudflare"
   }
 }
 
@@ -234,7 +234,7 @@ resource "aws_instance" "infodsm-ec2-bastion" {
 
   tags = {
     service = "infodsm"
-    name = "infodsm-ec2-bastion"
+    Name = "infodsm-ec2-bastion"
   }
 }
 
@@ -251,6 +251,6 @@ resource "aws_instance" "infodsm-ec2-prod" {
 
   tags = {
     service = "infodsm"
-    name = "infodsm-ec2-prod"
+    Name = "infodsm-ec2-prod"
   }
 }
