@@ -78,6 +78,11 @@ resource "aws_eip" "infodsm-eip" {
   vpc = true
 }
 
+resource "aws_eip_association" "infodsm-eip-association" {
+  allocation_id = aws_eip.infodsm-eip.id
+  instance_id = aws_instance.infodsm-ec2-prod.id
+}
+
 //NAT Gateway
 resource "aws_nat_gateway" "infodsm-ngw" {
   allocation_id = aws_eip.infodsm-eip.id

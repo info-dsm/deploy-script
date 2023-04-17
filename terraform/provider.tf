@@ -10,4 +10,14 @@ provider "aws" {
   secret_key = var.aws_secret_key
   region = "ap-northeast-2"
 }
+
+variable "cloudflare_api_key" {
+  type = string
+}
+
+//provider "cloudflare" {
+//  api_key = var.cloudflare_api_key
+//  version =
+//}
+
 //terraform apply -var aws_access_key=$AWS_ADMIN_ACCESS_KEY -var aws_secret_key=$AWS_ADMIN_SECRET_KEY
