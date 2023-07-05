@@ -8,3 +8,17 @@ tarraform/terraform.tfstate
 tarraform/terraform.tfstate.backup
 
 tarraform/.terraform/providers/
+
+terraform/.terraform.*
+
+terraform/.terraform/
+
+terraform/terraform.tfvars
+
+*.backup
+
+terraform/terraform.tfstate
+
+ansible/playbooks/inventory/inventory.yaml
+
+ansible/playbooks/roles/nginx/files/

@@ -1,0 +1,9 @@
+---
+- name: install apt packages
+  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+  become: True
+  with_items:
+    - git
+    - nginx
+
+- include: nginx.yaml

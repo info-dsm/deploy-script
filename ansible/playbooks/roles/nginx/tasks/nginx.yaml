@@ -1,0 +1,23 @@
+- name: create directories for ssl certificates
+  file: path=/etc/nginx/ssl state=directory
+  become: True
+
+- name: copy cert.pem
+  copy:
+    src: "cert.pem"
+    dest: "/etc/ssl/certs/cert.pem"
+    mode: 0600
+  become: True
+  notify: restart nginx
+
+- name: copy key.pem
+  copy:
+    src: "key.pem"
+    dest: "/etc/ssl/private/key.pem"
+  become: True
+  notify: restart nginx
+
+- name: set the nginx config file
+  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
+  notify: restart nginx
+  become: True

@@ -1,23 +1,27 @@
-variable "aws_access_key" {
-  type = string
+terraform {
+  required_providers {
+    cloudflare = {
+      source = "cloudflare/cloudflare"
+    }
+    aws = {
+      source = "hashicorp/aws"
+    }
+    random = {
+      source = "hashicorp/random"
+    }
+  }
+  required_version = ">= 0.13"
 }
-variable "aws_secret_key" {
-  type = string
+
+provider "cloudflare" {
+  api_token    = var.cloudflare_token
 }
 
 provider "aws" {
   access_key = var.aws_access_key
   secret_key = var.aws_secret_key
-  region = "ap-northeast-2"
+  region = var.aws_region
 }
 
-variable "cloudflare_api_key" {
-  type = string
+provider "random" {
 }
-
-//provider "cloudflare" {
-//  api_key = var.cloudflare_api_key
-//  version =
-//}
-
-//terraform apply -var aws_access_key=$AWS_ADMIN_ACCESS_KEY -var aws_secret_key=$AWS_ADMIN_SECRET_KEY
