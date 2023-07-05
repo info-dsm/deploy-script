@@ -74,6 +74,28 @@ resource "aws_security_group" "infodsm-sg-ssh" {
   }
 }
 
+resource "aws_security_group" "infodsm-sg-https" {
+  description = "Allow 443port for ssh"
+  vpc_id = aws_vpc.infodsm-vpc.id
+  ingress {
+    from_port = 443
+    protocol = "tcp"
+    to_port = 443
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "infodsm-sg-https"
+  }
+}
+
 resource "aws_key_pair" "local-key" {
   public_key = file("${var.private_key_path}.pub")
   key_name = var.infodsm_key_name
@@ -84,7 +106,8 @@ resource "aws_instance" "infodsm-ec2" {
   instance_type = "t3.medium"
   subnet_id = aws_subnet.infodsm-subnet-public.id
   security_groups = [
-    aws_security_group.infodsm-sg-ssh.id
+    aws_security_group.infodsm-sg-ssh.id,
+    aws_security_group.infodsm-sg-https.id
   ]
   key_name = var.infodsm_key_name
 
@@ -94,7 +117,7 @@ resource "aws_instance" "infodsm-ec2" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt update", "sudo apt install python3 -y",  "echo Done!"
+      "sudo apt update", "sudo apt install python3 -y",  "sudo timedatectl set-timezone Asia/Seoul", "echo Done!"
     ]
     connection {
       host = self.public_ip

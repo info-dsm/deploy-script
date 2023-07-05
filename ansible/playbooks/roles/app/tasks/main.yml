@@ -1,0 +1,25 @@
+---
+- name: install apt packages
+  apt:
+    pkg: "{{ item }}"
+    update_cache: yes
+    cache_valid_time: 3600
+  become: True
+  with_items:
+    - docker.io
+    - docker-compose
+    - python3-pip
+
+- name: Install pip packages
+  pip:
+    name: "{{ item }}"
+  become: True
+  with_items:
+    - docker
+    - docker-compose
+
+- name: Add uesrmod on docker group
+  command:
+    cmd: "sudo usermod -aG docker $USER"
+
+- include: app.yaml

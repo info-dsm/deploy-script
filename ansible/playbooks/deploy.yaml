@@ -4,4 +4,4 @@
   roles:
     - role: nginx
       domain_name: info-dsm.info
-      host: 54.180.24.205
+    - role: app
