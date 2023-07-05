@@ -103,7 +103,7 @@ resource "aws_key_pair" "local-key" {
 
 resource "aws_instance" "infodsm-ec2" {
   ami = "ami-0c9c942bd7bf113a2"
-  instance_type = "t3.medium"
+  instance_type = "t3.large"
   subnet_id = aws_subnet.infodsm-subnet-public.id
   security_groups = [
     aws_security_group.infodsm-sg-ssh.id,
@@ -128,7 +128,7 @@ resource "aws_instance" "infodsm-ec2" {
   }
   provisioner "local-exec" {
     // If specifying an SSH key and user, add `--private-key <path to private key> -u var.name`
-    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ../ansible/playbooks/inventory, ../ansible/playbooks/deploy.yaml"
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i  ../ansible/playbooks/inventory/ ../ansible/playbooks/deploy.yaml"
   }
 
 }

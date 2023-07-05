@@ -1,5 +1,9 @@
 ---
 - name: install apt packages
+  command:
+    cmd: "sudo apt update -y "
+
+- name: install apt packages
   apt:
     pkg: "{{ item }}"
     update_cache: yes
