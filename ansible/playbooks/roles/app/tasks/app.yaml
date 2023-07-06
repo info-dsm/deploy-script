@@ -7,7 +7,7 @@
 
 - name: Copy docker-compose file
   copy:
-    src: ../files/docker-compose.yaml
+    src: ../files/docker-compose-adh.yaml
     dest: $HOME/info/docker-compose.yaml
 
 - name: Set-up docker-compose
