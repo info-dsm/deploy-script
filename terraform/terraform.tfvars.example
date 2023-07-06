@@ -1,0 +1,14 @@
+aws_access_key            = "XXXXXXXXXXXXXXXXX"
+aws_secret_key            = "IrPcioRzr+xjie8sRvZegeqDiwndsvwgrsdsdv"
+aws_region                = "ap-northeast-2"
+instance_type             = "t3.medium"
+
+cloudflare_zone           = "example.com"
+cloudflare_zone_id        = "70fa103943dvposkofewiooworio3io3"
+cloudflare_account_id     = "601544896sjdhfhiuwcuihsuih75de7c"
+cloudflare_email          = "example@example.com"
+cloudflare_token          = "snoifwiocviosDwJncodsioWWSFdjoDWjCQJ9dEAV"
+
+infodsm_key_name          = "local-key"
+aws_instance_ami_id       = "ami-0c9c942bd7bf113a2" // Ubuntu 22.04.2 LTS
+private_key_path          = "~/.ssh/id_rsa"

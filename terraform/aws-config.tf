@@ -126,10 +126,10 @@ resource "aws_instance" "infodsm-ec2" {
       private_key= file("~/.ssh/id_rsa")
     }
   }
-  provisioner "local-exec" {
-    // If specifying an SSH key and user, add `--private-key <path to private key> -u var.name`
-    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i  ../ansible/playbooks/inventory/ ../ansible/playbooks/deploy.yaml"
-  }
+//  provisioner "local-exec" {
+//    // If specifying an SSH key and user, add `--private-key <path to private key> -u var.name`
+//    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i  ../ansible/playbooks/inventory/ ../ansible/playbooks/deploy.yaml"
+//  }
 
 }
 

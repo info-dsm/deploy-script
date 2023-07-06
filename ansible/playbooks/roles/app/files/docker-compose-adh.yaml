@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  adh:
+    image: docker.io/jinwoo794533/dsm-adh:0.00.11
+    ports:
+      - "8000:8080"
+    container_name: "adh-server"
+    networks:
+      - web
+  database:
+    image: docker.io/mysql:8.0
+    ports:
+      - "3306:3306"
+    container_name: "database"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootroot!!
+      TZ: Asia/Seoul
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
