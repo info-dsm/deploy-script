@@ -21,4 +21,5 @@ terraform/terraform.tfstate
 
 ansible/playbooks/inventory/inventory.yaml
 
-ansible/playbooks/roles/nginx/files/
+ansible/playbooks/roles/nginx/files/cert.pem
+ansible/playbooks/roles/nginx/files/key.pem
