@@ -121,7 +121,7 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "infodsm-ec2" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.large"
+  instance_type = var.instance_type
   subnet_id     = aws_subnet.infodsm-subnet-public.id
   security_groups = [
     aws_security_group.infodsm-sg-ssh.id,
@@ -141,7 +141,7 @@ resource "aws_instance" "infodsm-ec2" {
       host        = self.public_ip
       user        = "ubuntu"
       type        = "ssh"
-      private_key = file("~/.ssh/id_rsa")
+      private_key = var.private_key
     }
   }
   //  provisioner "local-exec" {

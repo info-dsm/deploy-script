@@ -55,3 +55,8 @@ variable "public_key" {
   description = "public key content"
   type        = string
 }
+
+variable "private_key" {
+  description = "private key"
+  type        = string
+}
