@@ -11,4 +11,4 @@ cloudflare_token          = "snoifwiocviosDwJncodsioWWSFdjoDWjCQJ9dEAV"
 
 infodsm_key_name          = "local-key"
 aws_instance_ami_id       = "ami-0c9c942bd7bf113a2" // Ubuntu 22.04.2 LTS
-private_key_path          = "~/.ssh/id_rsa"
+public_key          = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4slCtSEVaglw55JN4uf1dUeLrceYCeTVL5po/wJxeKePb/QhsC3m2OC4MlKeE0PZzlRW5rQDwOKb4Ly9FgOzT0AgzN6w4/38ZR22Er0K5Q+mhQuuR60zI96ks57UgGYmDqabdAT9DkWmO+XOFugf8OWnGfI2lG/fUjQb4tjJACWQ5FU+vMdfK2YZ5zafs0ORTIB+v+bpihGi//pS65oEbcKMSI5fswimzjcZx288zGYzV7E1ygSWQ0k/N4yqMfxf8gvGYn33G0ITxVItPXw2JlKk1VHxTzVCX/HHrAzzFMkr8+NJX44yWGeqmb0MO5AtcQ4fGu+rIhdUET3TqTSQp "

@@ -1,8 +1,8 @@
 resource "aws_vpc" "infodsm-vpc" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
-  enable_dns_support = true
-  instance_tenancy = "default"
+  enable_dns_support   = true
+  instance_tenancy     = "default"
 
   tags = {
     Name = "infodsm-vpc"
@@ -28,22 +28,22 @@ resource "aws_route_table" "infodsm-rt-public" {
 
 resource "aws_route_table_association" "infodsm-rt-public-association-1" {
   route_table_id = aws_route_table.infodsm-rt-public.id
-  subnet_id = aws_subnet.infodsm-subnet-public.id
+  subnet_id      = aws_subnet.infodsm-subnet-public.id
 }
 
 //Public RouteTable Routing
 resource "aws_route" "infodsm-rt-public-route-1" {
-  route_table_id = aws_route_table.infodsm-rt-public.id
+  route_table_id         = aws_route_table.infodsm-rt-public.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id = aws_internet_gateway.infodsm-igw.id
+  gateway_id             = aws_internet_gateway.infodsm-igw.id
 }
 
 //PublicSubnet
 resource "aws_subnet" "infodsm-subnet-public" {
-  cidr_block = "10.0.0.0/24"
+  cidr_block              = "10.0.0.0/24"
   map_public_ip_on_launch = true
-  availability_zone = "${var.aws_region}a"
-  vpc_id = aws_vpc.infodsm-vpc.id
+  availability_zone       = "${var.aws_region}a"
+  vpc_id                  = aws_vpc.infodsm-vpc.id
 
   tags = {
     Name = "infodsm-subnet-public"
@@ -54,18 +54,18 @@ resource "aws_subnet" "infodsm-subnet-public" {
 //SecurityGroup
 resource "aws_security_group" "infodsm-sg-ssh" {
   description = "Allow 22port for ssh"
-  vpc_id = aws_vpc.infodsm-vpc.id
+  vpc_id      = aws_vpc.infodsm-vpc.id
   ingress {
-    from_port = 22
-    protocol = "tcp"
-    to_port = 22
+    from_port   = 22
+    protocol    = "tcp"
+    to_port     = 22
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -76,18 +76,20 @@ resource "aws_security_group" "infodsm-sg-ssh" {
 
 resource "aws_security_group" "infodsm-sg-https" {
   description = "Allow 443port for ssh"
-  vpc_id = aws_vpc.infodsm-vpc.id
+  vpc_id      = aws_vpc.infodsm-vpc.id
+
+
   ingress {
-    from_port = 443
-    protocol = "tcp"
-    to_port = 443
+    from_port   = 443
+    protocol    = "tcp"
+    to_port     = 443
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -97,14 +99,30 @@ resource "aws_security_group" "infodsm-sg-https" {
 }
 
 resource "aws_key_pair" "local-key" {
-  public_key = file("${var.private_key_path}.pub")
-  key_name = var.infodsm_key_name
+  public_key = var.public_key
+  key_name   = var.infodsm_key_name
 }
 
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "owner-alias"
+    values = ["amazon"]
+  }
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/*"] //ubuntu
+  }
+}
+
+
 resource "aws_instance" "infodsm-ec2" {
-  ami = "ami-0c9c942bd7bf113a2"
-  instance_type = "t3.large"
-  subnet_id = aws_subnet.infodsm-subnet-public.id
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = var.instance_type
+  subnet_id     = aws_subnet.infodsm-subnet-public.id
   security_groups = [
     aws_security_group.infodsm-sg-ssh.id,
     aws_security_group.infodsm-sg-https.id
@@ -117,19 +135,19 @@ resource "aws_instance" "infodsm-ec2" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt update", "sudo apt install python3 -y",  "sudo timedatectl set-timezone Asia/Seoul", "echo Done!"
+      "sudo apt update", "sudo apt install python3 -y", "sudo timedatectl set-timezone Asia/Seoul", "echo Done!"
     ]
     connection {
-      host = self.public_ip
-      user = "ubuntu"
-      type = "ssh"
-      private_key= file("~/.ssh/id_rsa")
+      host        = self.public_ip
+      user        = "ubuntu"
+      type        = "ssh"
+      private_key = var.private_key
     }
   }
-//  provisioner "local-exec" {
-//    // If specifying an SSH key and user, add `--private-key <path to private key> -u var.name`
-//    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i  ../ansible/playbooks/inventory/ ../ansible/playbooks/deploy.yaml"
-//  }
+  //  provisioner "local-exec" {
+  //    // If specifying an SSH key and user, add `--private-key <path to private key> -u var.name`
+  //    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i  ../ansible/playbooks/inventory/ ../ansible/playbooks/deploy.yaml"
+  //  }
 
 }
 
