@@ -114,7 +114,7 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "name"
-    values = [var.ami_name]
+    values = ["ubuntu/images/hvm-ssd/*"] //ubuntu
   }
 }
 
