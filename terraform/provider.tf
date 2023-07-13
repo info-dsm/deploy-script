@@ -1,4 +1,12 @@
 terraform {
+  cloud {
+    organization = "infodsm"
+    hostname     = "app.terraform.io" # default
+
+    workspaces {
+      name = "deploy-script"
+    }
+  }
   required_providers {
     cloudflare = {
       source = "cloudflare/cloudflare"
@@ -14,13 +22,13 @@ terraform {
 }
 
 provider "cloudflare" {
-  api_token    = var.cloudflare_token
+  api_token = var.cloudflare_token
 }
 
 provider "aws" {
   access_key = var.aws_access_key
   secret_key = var.aws_secret_key
-  region = var.aws_region
+  region     = var.aws_region
 }
 
 provider "random" {

@@ -23,3 +23,9 @@ ansible/playbooks/inventory/inventory.yaml
 
 ansible/playbooks/roles/nginx/files/cert.pem
 ansible/playbooks/roles/nginx/files/key.pem
+
+terraform/graph.dot
+
+terraform/graph.dot.svg
+
+.DS_Store
