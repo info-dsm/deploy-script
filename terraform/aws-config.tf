@@ -103,8 +103,24 @@ resource "aws_key_pair" "local-key" {
   key_name   = var.infodsm_key_name
 }
 
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "owner-alias"
+    values = ["amazon"]
+  }
+
+  filter {
+    name   = "name"
+    values = [var.ami_name]
+  }
+}
+
+
 resource "aws_instance" "infodsm-ec2" {
-  ami           = "ami-0c9c942bd7bf113a2"
+  ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.large"
   subnet_id     = aws_subnet.infodsm-subnet-public.id
   security_groups = [

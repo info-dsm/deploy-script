@@ -51,11 +51,6 @@ variable "infodsm_key_name" {
   type        = string
 }
 
-variable "aws_instance_ami_id" {
-  description = "aws machine image"
-  type        = string
-}
-
 variable "private_key_path" {
   description = "private key path"
   type        = string
