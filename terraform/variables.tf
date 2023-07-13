@@ -51,7 +51,7 @@ variable "infodsm_key_name" {
   type        = string
 }
 
-variable "private_key_path" {
-  description = "private key path"
+variable "public_key" {
+  description = "public key content"
   type        = string
 }

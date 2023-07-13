@@ -99,7 +99,7 @@ resource "aws_security_group" "infodsm-sg-https" {
 }
 
 resource "aws_key_pair" "local-key" {
-  public_key = file("${var.private_key_path}.pub")
+  public_key = var.public_key
   key_name   = var.infodsm_key_name
 }
 
