@@ -123,6 +123,7 @@ resource "aws_instance" "infodsm-ec2" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
   subnet_id     = aws_subnet.infodsm-subnet-public.id
+
   security_groups = [
     aws_security_group.infodsm-sg-ssh.id,
     aws_security_group.infodsm-sg-https.id
@@ -133,21 +134,12 @@ resource "aws_instance" "infodsm-ec2" {
     Name = "infodsm-ec2"
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt update", "sudo apt install python3 -y", "sudo timedatectl set-timezone Asia/Seoul", "echo Done!"
-    ]
-    connection {
-      host        = self.public_ip
-      user        = "ubuntu"
-      type        = "ssh"
-      private_key = var.private_key
-    }
-  }
-  //  provisioner "local-exec" {
-  //    // If specifying an SSH key and user, add `--private-key <path to private key> -u var.name`
-  //    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i  ../ansible/playbooks/inventory/ ../ansible/playbooks/deploy.yaml"
-  //  }
+  user_data = <<EOF
+  #!/bin/bash
+  sudo apt update
+  sudo apt install python3 -y
+  sudo timedatectl set-timezone Asia/Seoul
+  echo Done!
+EOF
 
 }
-
