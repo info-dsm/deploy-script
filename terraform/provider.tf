@@ -28,7 +28,8 @@ provider "cloudflare" {
 provider "aws" {
   access_key = var.TFC_AWS_ACCESS__KEY
   secret_key = var.TFC_AWS_SECRET_ACCESS_KEY
-  region     = var.aws_region
+
+  region = var.aws_region
 }
 
 provider "random" {
