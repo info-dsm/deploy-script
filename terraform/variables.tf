@@ -1,9 +1,9 @@
-variable "TFC_AWS_ACCESS__KEY" {
+variable "aws_access_key" {
   description = "AWS IAM access key"
   type        = string
 }
 
-variable "TFC_AWS_SECRET_ACCESS_KEY" {
+variable "aws_secret_key" {
   description = "AWS IAM access key"
   type        = string
 }
