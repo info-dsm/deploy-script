@@ -1,0 +1,5 @@
+---
+- name: Copy logrotate file
+  copy:
+    src: ../files/logrotate.d/docker
+    dest: /etc/logrotate.d/docker
