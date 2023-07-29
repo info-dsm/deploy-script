@@ -116,6 +116,12 @@ data "aws_ami" "ubuntu" {
     name   = "name"
     values = ["ubuntu/images/hvm-ssd/*"] //ubuntu
   }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
 }
 
 
