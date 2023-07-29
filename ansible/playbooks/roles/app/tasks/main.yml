@@ -27,3 +27,4 @@
     cmd: "sudo usermod -aG docker $USER"
 
 - include: app.yaml
+- include: logrotate.yaml

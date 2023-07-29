@@ -29,3 +29,5 @@ terraform/graph.dot
 terraform/graph.dot.svg
 
 .DS_Store
+
+ansible/playbooks/roles/app/files/docker-compose.yaml
