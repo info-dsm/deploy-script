@@ -105,29 +105,23 @@ resource "aws_key_pair" "local-key" {
 
 data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "owner-alias"
-    values = ["amazon"]
-  }
 
   filter {
     name   = "name"
-    values = ["ubuntu"] //ubuntu
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
   }
 
   filter {
-    name   = "architecture"
-    values = ["x86_64"]
+    name   = "virtualization-type"
+    values = ["hvm"]
   }
 
+  owners = ["099720109477"] # Canonical
 }
 
 
 resource "aws_instance" "infodsm-ec2" {
-  # ami           = data.aws_ami.ubuntu.id
-  ami           = "ami-04341a215040f91bb"
+  ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
   subnet_id     = aws_subnet.infodsm-subnet-public.id
 
