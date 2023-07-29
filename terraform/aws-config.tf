@@ -105,23 +105,18 @@ resource "aws_key_pair" "local-key" {
 
 data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "owner-alias"
-    values = ["amazon"]
-  }
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/*"] //ubuntu
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
   }
 
   filter {
-    name   = "architecture"
-    values = ["x86_64"]
+    name   = "virtualization-type"
+    values = ["hvm"]
   }
 
+  owners = ["099720109477"] # Canonical
 }
 
 
