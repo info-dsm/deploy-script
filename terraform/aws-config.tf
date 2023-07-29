@@ -126,7 +126,8 @@ data "aws_ami" "ubuntu" {
 
 
 resource "aws_instance" "infodsm-ec2" {
-  ami           = data.aws_ami.ubuntu.id
+  # ami           = data.aws_ami.ubuntu.id
+  ami           = "ami-04341a215040f91bb"
   instance_type = var.instance_type
   subnet_id     = aws_subnet.infodsm-subnet-public.id
 
