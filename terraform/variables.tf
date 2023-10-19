@@ -46,7 +46,7 @@ variable "cloudflare_token" {
   type        = string
 }
 
-variable "infodsm_key_name" {
+variable "ssh_key" {
   description = "ssh key name"
   type        = string
 }
@@ -58,5 +58,10 @@ variable "public_key" {
 
 variable "private_key" {
   description = "private key"
+  type        = string
+}
+
+variable "prefix_name" {
+  description = "prefix for resources"
   type        = string
 }

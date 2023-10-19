@@ -8,16 +8,18 @@
     dest: "/etc/ssl/certs/cert.pem"
     mode: 0600
   become: True
-  notify: restart nginx
+  notify: reload nginx
 
 - name: copy key.pem
   copy:
     src: "key.pem"
     dest: "/etc/ssl/private/key.pem"
   become: True
-  notify: restart nginx
+  notify: reload nginx
 
 - name: set the nginx config file
   template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
-  notify: restart nginx
+  notify: reload nginx
   become: True
+
+  
