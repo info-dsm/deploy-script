@@ -46,7 +46,7 @@ variable "cloudflare_token" {
   type        = string
 }
 
-variable "ssh_key" {
+variable "key_name" {
   description = "ssh key name"
   type        = string
 }
@@ -64,4 +64,5 @@ variable "private_key" {
 variable "prefix_name" {
   description = "prefix for resources"
   type        = string
+  default     = "onui"
 }
