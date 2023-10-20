@@ -56,11 +56,6 @@ variable "public_key" {
   type        = string
 }
 
-variable "private_key" {
-  description = "private key"
-  type        = string
-}
-
 variable "prefix_name" {
   description = "prefix for resources"
   type        = string
